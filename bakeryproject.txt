@@ -1,0 +1,231 @@
+import mysql.connector
+def createtables():
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="",
+    database="bakery"
+)
+
+    mycursor = mydb.cursor()
+
+    mycursor.execute("Create table cakes(cakename varchar(20),caketype varchar(20),cakeprice int, cakeqty int);")
+    mycursor.execute("create table drinks(drinkname varchar(20),drinktype varchar(20),drinkprice int,drinkqty int)")
+    mycursor.execute("create table snacks(snackname varchar(20),snacktype varchar(20),snackprice int,snackqty int);")
+    print("Tables Created in Database")
+
+def buycake1():
+    cakename=input("Enter cake name")
+    caketype=input("Enter Cake Type")
+    cakeprice=int(input("Enter cake price"))
+    cakeqty=int(input("Enter Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO cakes(cakename,caketype,cakeprice,cakeqty) VALUES (%s,%s,%s,%s)"
+    val = (cakename,caketype,cakeprice,cakeqty)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record inserted.")
+def buydrink1():
+    drinkname=input("Enter drink name")
+    drinktype=input("Enter drink Type")
+    drinkprice=int(input("Enter drink price"))
+    drinkqty=int(input("Enter drink Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO drinks(drinkname,drinktype,drinkprice,drinkqty) VALUES (%s,%s,%s,%s)"
+    val = (drinkname,drinktype,drinkprice,drinkqty)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record inserted.")
+def buysnack1():
+    snackname=input("Enter snack name")
+    snacktype=input("Enter snack Type")
+    snackprice=int(input("Enter snack price"))
+    snackqty=int(input("Enter snack Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO snacks(snackname,snacktype,snackprice,snackqty) VALUES (%s,%s,%s,%s)"
+    val = (snackname,snacktype,snackprice,snackqty)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record inserted.")
+def addcake1():
+    cakename=input("Enter cake name")
+    cakeqty=int(input("Enter New Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "update cakes set cakeqty=%s where cakename=%s"
+    val = (cakeqty,cakename)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record updated.")
+def adddrink1():
+    drinkname=input("Enter drink name")
+    drinkqty=int(input("Enter New Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "update drinks set drinkqty=%s where drinkname=%s"
+    val = (drinkqty,drinkname)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record updated.")
+def addsnack1():
+    snackname=input("Enter snack name")
+    snackqty=int(input("Enter New Quantity"))
+    mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="",
+  database="bakery"
+)
+    mycursor = mydb.cursor()
+    sql = "update snacks set snackqty=%s where snackname=%s"
+    val = (snackqty,snackname)
+    mycursor.execute(sql,val)
+
+
+    mydb.commit()
+
+    print(mycursor.rowcount, "record updated.")
+def buy():
+    print("1. Add Cake")
+    print("2. Add Drinks")
+    print("3. Add Snacks")
+    ch=int(input("Enter your choice 1-3"))
+    if(ch==1):
+        buycake1();
+    if(ch==2):
+        buydrink1();
+    if(ch==3):
+        buysnack1();
+def add():
+    print("1. Update Cake")
+    print("2. Update Drinks")
+    print("3. Update Snacks")
+    ch=int(input("Enter your choice 1-3"))
+    if(ch==1):
+        addcake1();
+    if(ch==2):
+        adddrink1();
+    if(ch==3):
+        addsnack1();
+def viewcake1():
+        conn = mysql.connector.connect(
+         user='root',
+         password='',
+         host='127.0.0.1',
+         database='bakery')
+
+        cur = conn.cursor()
+
+        cur.execute("select * from cakes")
+        myresult = cur.fetchall()
+
+        for x in myresult:
+            print(x)
+
+
+        cur.close()
+        conn.close()
+def viewsnack1():
+        conn = mysql.connector.connect(
+         user='root',
+         password='',
+         host='127.0.0.1',
+         database='bakery')
+
+        cur = conn.cursor()
+
+        cur.execute("select * from snacks")
+        myresult = cur.fetchall()
+
+        for x in myresult:
+            print(x)
+
+
+        cur.close()
+        conn.close()
+def viewdrink1():
+        conn = mysql.connector.connect(
+         user='root',
+         password='',
+         host='127.0.0.1',
+         database='bakery')
+
+        cur = conn.cursor()
+
+        cur.execute("select * from drinks")
+        myresult = cur.fetchall()
+
+        for x in myresult:
+            print(x)
+
+
+        cur.close()
+        conn.close()
+def viewall():
+    print("1. View All Cake")
+    print("2. View All Drinks")
+    print("3. View All Snacks")
+    ch=int(input("Enter your choice 1-3"))
+    if(ch==1):
+        viewcake1();
+    if(ch==2):
+        viewdrink1();
+    if(ch==3):
+        viewsnack1();
+print("Welcome to Bakery Management System")
+print("1. Buy")
+print("2. Add")
+print("3. View All")
+print("4. Create Tables")
+ch=int(input("Enter your choice 1,2,3,4"))
+if(ch==1):
+    buy();
+if(ch==2):
+    add();
+if(ch==3):
+    viewall();
+if(ch==4):
+    createtables();
